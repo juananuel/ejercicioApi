@@ -1,26 +1,21 @@
 const img = "./assets/ban-col.jpg";
 const imgNatural = "./assets/natural-col.jpg"
 
-// Obtener el ID del departamento de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const depId = urlParams.get("id");
 
-// URL de la API
 const departmentUrl = `https://api-colombia.com/api/v1/Department/${depId}`;
 const departmentCities = `https://api-colombia.com/api/v1/Department/${depId}/cities`
 const naturalAr = `https://api-colombia.com/api/v1/Department/${depId}/naturalareas`
 
-// Contenedores en el HTML
 const departments = document.getElementById("department");
 const citiesCont = document.getElementById("cities");
 const natural = document.getElementById("natural")
 
-// Función para mostrar los detalles del departamento
 function displayDepartments() {
   fetch(departmentUrl)
     .then((response) => response.json())
     .then((department) => {
-      // Crear la card para el departamento
       const card = document.createElement("div");
       card.classList.add("card-detail","p-3","d-flex","flex-column","justify-content-between");
 
@@ -46,13 +41,9 @@ function displayDepartments() {
       card.appendChild(population);
 
       departments.appendChild(card);
-
-      // Llamar a la función para mostrar las ciudades
-
     });
 }
 
-// Función para mostrar las ciudades del departamento
 function displayCities() {
   fetch(departmentCities)
     .then(response => response.json())
@@ -87,34 +78,33 @@ function displayNaturalAreas() {
   fetch(naturalAr)
     .then(response => response.json())
     .then((areas) => {
-      const areasCard = areas.naturalAreas
+      const areasCard = areas[0].naturalAreas
       console.log(areasCard)
-      // areas.forEach((area) => {
-      //   const areasCard = document.createElement("div");
-      //   areasCard.classList.add("card","p-3","d-flex","flex-column","justify-content-between");
+      areasCard.forEach((area) => {
+        const areasCard = document.createElement("div");
+        areasCard.classList.add("card","p-3","d-flex","flex-column","justify-content-between");
 
-      //   const image = document.createElement("img");
-      //   image.classList.add("card-img-top", "card-img");
-      //   image.src = imgNatural;
-      //   image.alt = area.name;
-      //   areasCard.appendChild(image);
+        const image = document.createElement("img");
+        image.classList.add("card-img-top", "card-img");
+        image.src = imgNatural;
+        image.alt = area.name;
+        areasCard.appendChild(image);
     
-      //   const cityTitle = document.createElement("h5");
-      //   cityTitle.classList.add("card-title", "text-center");
-      //   cityTitle.textContent = area.name;
-      //   areasCard.appendChild(cityTitle);
+        const cityTitle = document.createElement("h5");
+        cityTitle.classList.add("card-title", "text-center");
+        cityTitle.textContent = area.name;
+        areasCard.appendChild(cityTitle);
     
-      //   const cityDescription = document.createElement("p");
-      //   cityDescription.classList.add("card-text", "text-justify");
-      //   cityDescription.textContent = area.description;
-      //   areasCard.appendChild(cityDescription);
+        const cityDescription = document.createElement("p");
+        cityDescription.classList.add("card-text", "text-justify");
+        cityDescription.textContent = area.description;
+        areasCard.appendChild(cityDescription);
     
-      //   natural.appendChild(areasCard);
-      // });
+        citiesCont.appendChild(areasCard);
+      });
     })
 }
 
-// Ejecutar la función para mostrar los detalles del departamento
 displayDepartments();
 displayCities();
 displayNaturalAreas();
