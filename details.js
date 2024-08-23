@@ -1,4 +1,5 @@
 const img = "./assets/ban-col.jpg";
+const imgCities = "./assets/ciudad-colombia.jpg"
 const imgNatural = "./assets/natural-col.jpg"
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -55,7 +56,7 @@ function displayCities() {
 
         const image = document.createElement("img");
         image.classList.add("card-img-top", "card-img");
-        image.src = img;
+        image.src = imgCities;
         image.alt = city.name;
         cityCard.appendChild(image);
     

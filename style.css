@@ -40,6 +40,16 @@
   color: white;
   text-align: justify;
   z-index: 1;
+  max-height: 90%;
+}
+
+.hero-arrow{
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
 }
 
 .overlay{
@@ -134,9 +144,10 @@ padding-top: 50px;
 /*       ****        */
 
 .table-img{
-  width: 150px;
+  width: 250px;
   height: 200px;
   object-fit: cover;
+  background-repeat: no-repeat;
 }
 
 td {
